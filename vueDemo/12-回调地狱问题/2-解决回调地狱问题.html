@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>回调地狱解决案例</title>
+	</head>
+	<body>
+		<h1>回调地狱案例</h1>
+		<script src="../js/axios.js"></script>
+		<script>
+			/*返回的是一个promise对象*/
+			let ajaxA = axios.get("http://localhost:8090/getA")
+			
+			function ajaxB(str){
+				//返回promise对象
+				return axios.get("http://localhost:8090/getB",{
+						params: {
+							str:str
+						}
+				})
+			} 
+			 
+			function ajaxC(str){
+				//返回promise对象
+				return axios.get("http://localhost:8090/getC",{
+						params: {
+							str:str
+						}
+				})
+			}  
+			
+			ajaxA.then(result => {
+				//第一个ajax请求调用成功之后,将参数传递给第二个ajax请求
+				return ajaxB(result.data)
+			}).then(result => {
+				//第二个ajax请求调用成功之后,将参数传递给第三个ajax请求
+				return ajaxC(result.data)
+			}).then(result => {
+				//第三个ajax请求调用成功,获取结果
+				alert(result.data)
+				alert("回调地狱问题解决成功,将嵌套结构 改为链式结构")
+				alert("记得好评 666")
+			})
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

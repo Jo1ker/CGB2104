@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>回调地狱案例</title>
+	</head>
+	<body>
+		<h1>回调地狱案例分析</h1>
+		
+		<script src="jquery-3.6.0.min.js"></script>
+		<script src="../js/axios.js"></script>
+		<script>
+			//1.模拟回调地狱问题
+			$.ajax({
+				type: "get",
+				url: "http://localhost:8090/getA",
+				success: function(result){
+					//开始第二层嵌套
+					$.ajax({
+						type: "get",
+						data: {str: result},
+						url: "http://localhost:8090/getB",
+						success: function(result){
+							//开始第三层嵌套
+							$.ajax({
+								type: "get",
+								data: {str: result},
+								url: "http://localhost:8090/getC",
+								success: function(result){
+									alert("回调地狱成功:"+result)
+								}
+							})
+						}
+					})
+				}
+			})
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

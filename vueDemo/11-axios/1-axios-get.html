@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Axios练习</title>
+	</head>
+	<body>
+		<h1>Axios远程调用练习</h1>
+		<script src="../js/axios.js"></script>
+		<script>
+			/*
+				1.promise对象解决了传统Ajax中的回调地狱问题
+				2.Axios封装了promise对象，异步调用更加简洁
+				3.常见请求类型 1.get(查) 2.post(form表单) 3.put(改) 4.delete(删)
+				4.分组：用法相同 get/delete post/put
+				注意事项：默认条件下通过浏览器只能发起get请求
+			*/
+		   
+		   /* 1.Axios入门案例-get请求 
+				原始方式：参数： 1.url地址 2.请求参数 3.回调函数
+				axios方式：参数： 1.url地址 2.请求参数
+								关键字：then(回调函数)
+		   */
+		   axios.get("http://localhost:8090/findAll")
+				  .then(function(result){
+					  //result返回值是一个promise对象
+					  console.log(result)
+					  //动态获取服务器返回值使用result.data
+					  console.log(result.data)
+				  })
+				  
+			//2.箭头函数写法 result参数只有一个可以省略括号
+			axios.get("http://localhost:8090/findAll")
+							  .then(result => {
+									console.log(result.data)
+							  })
+			/**
+			 * 3.带参数的请求方式1---字符串拼接
+			 * 需求：查询ID=1的用户数据
+			 * url:http://localhost:8090/getUserById?id=1
+			 * */
+			axios.get("http://localhost:8090/getUserById?id=1")
+					.then(result => {
+						console.log(result.data)
+					})
+			
+			/**
+			 * 根据对象查询数据库
+			 * 需求：根据name="大乔" sex="女"的条件查询数据库
+			 * url:http://localhost:8090/getUserByNS
+			 * */
+			 //封装对象
+			 let user = {
+				 name: '大乔',
+				 sex: '女'
+			 }
+			axios.get("http://localhost:8090/getUserByNS",{
+				//关键字
+				params: user
+			}).then(result => {
+				console.log(result.data)
+			})
+					
+			/**
+			 * 要求：利用restful风格 
+			 *          查询name中包含"君"
+			 * url: http://localhost:8090/user/君  GET
+			 * */
+			 axios.get("http://localhost:8090/user/君")
+					.then(result => {
+						console.log(result.data)
+					})
+							  
+		</script>
+	</body>
+</html>

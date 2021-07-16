@@ -1,0 +1,11 @@
+# 1. 数据结构 key-value结构
+# 2. 写法    key:(空格) value   !!!!
+# 3. YML文件有层级结构 注意父子级的语法的缩进
+# 4. YML文件程序默认读取时采取UTF-8编码
+server:
+  port: 8090
+  #servlet:
+    #context-path: /   # 项目的发布路径
+
+userinfo:
+  name: uzi

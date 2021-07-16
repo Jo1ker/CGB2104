@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>前后端交互</title>
+
+	</head>
+	<body>
+		<!-- 1.定义vue根标签 -->
+		<div id="app" align="center">
+			<h1>用户新增</h1>
+			<div>
+				用户名：<input type="text" v-model="addUser.name"/>
+				年龄：<input type="text" v-model="addUser.age"/>
+				性别：<input type="text" v-model="addUser.sex"/>
+				<button @click="addUserBtn">新增</button>
+			</div>
+			<hr />
+			<!-- 1.ID不允许修改 2.数据回显 -->
+			<h1>用户修改</h1>
+			<div>
+				ID编号: <input type="text" v-model="updateUser.id" disabled />
+				用户名: <input type="text" v-model="updateUser.name"/>
+				年龄:   <input type="text" v-model="updateUser.age"/>
+				性别:   <input type="text" v-model="updateUser.sex"/>
+				<button @click="updateUserBtn">修改</button>
+			</div>
+			<hr />
+			<!-- 需要准备一个表格,展现user的数据 -->
+			<table id="tab1" border="1px" width="80%" align="center">
+				<tr align="center" height="60px">
+					<th colspan="5">
+						<h1>用户列表</h1>
+					</th>
+				</tr>
+				<tr align="center" height="60px">
+					<th>编号</th>
+					<th>名称</th>
+					<th>年龄</th>
+					<th>性别</th>
+					<th>操作</th>
+				</tr>
+				
+				<!-- 4.遍历数据实现表格数据获取 -->
+				<tr align="center" v-for="user in userList">
+					<td v-text="user.id"></td>
+					<td v-text="user.name"></td>
+					<td v-text="user.age"></td>
+					<td v-text="user.sex"></td>
+					<td>
+						<button  @click="toUpdate(user)">修改</button>
+						<button @click="deleteUserById(user.id)">删除</button>
+					</td>
+				</tr>
+				
+			</table>
+		</div>
+		
+		<!-- 导入2个JS函数类库  vue/axios -->
+		<script src="../js/vue.js"></script>
+		<script src="../js/axios.js"></script>
+		<script>
+			axios.defaults.baseURL = "http://localhost:8090"
+			const app = new Vue({
+				el: "#app",
+				data: {
+					userList: [],
+					addUser: {
+						name:  ' ',
+						age: ' ',
+						sex: ' '
+					},
+					updateUser: {
+						id:	'',
+						name: '',
+						age: '',
+						sex: ''
+					}
+				},
+				methods: {
+					//2.定义获取远程数据的ajax请求
+					async getUserList(){
+						let {data: result} = await axios.get("/findAll")
+						this.userList = result
+					},
+					
+					async deleteUserById(id){
+						//常规写法
+						//axios.delete("http://localhost:8090/user/"+id)
+						//模版字符串写法
+						let {data: result} = await axios.delete(`/user/${id}`)
+						console.log(result)
+						this.getUserList()
+					},
+					async addUserBtn(){
+						let {data: result} = await axios.post("/saveUser",this.addUser)
+						console.log(result)
+						//如果新增成功，则刷新列表页面
+						this.getUserList()
+						//新增成功之后，清空新增信息
+						this.addUser = {}
+					},
+					toUpdate(user){
+						//点击修改按钮时,应该将数据传递给updateUser 
+						this.updateUser = user
+					},
+					async updateUserBtn(){
+						let {data: result} = await axios.put("/updateUser",this.updateUser)
+						console.log(result)
+						this.getUserList()
+						this.updateUser = {}
+					}
+					
+				},
+				created(){
+					//1.触发函数调用
+					this.getUserList()
+				}
+			})
+		</script>
+	</body>
+</html>

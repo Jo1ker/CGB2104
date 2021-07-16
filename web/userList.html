@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>前后端交互</title>
+		<script src="./jquery-3.6.0.min.js"></script>
+		<script>
+			//jquery语法：让整个页面浏览器加载完成之后，再次执行JS
+			$(function(){
+				$.ajax({
+					/**
+					 * data参数传递：
+					 *  1.对象方式实现数据传参
+					 * 	语法: {key:value,key2:value2}
+					 *  2.拼接字符串的方式
+					 * 	语法：key1=value1&key2=value2
+					 * */
+					type: "get", //请求类型
+					url: "http://localhost:8090/findAll", //url地址
+					//data: {id:100,name:"tom",age:18},
+					//data: "id=100&name=tom&age=18", //参数
+					success:function(data){
+						//将data中的数据添加到表格中
+						// for(var i=0;i<data.length;i++){
+						// 	console.log(data[i])
+						// }
+						
+						//JS原生函数 in关键字遍历的是下标
+						// for(index in data){
+						// 	console.log(data[index])
+						// }
+						//JS原生函数 of关键字遍历的是对象
+						for(user of data){
+							// let id = user.id
+							// let name = user.name
+							// let age = user.age
+							// let sex = user.sex
+							
+							//${对象.属性值} 动态的获取数据
+							let tr = `
+								<tr align="center">
+									<td>${user.id}</td>
+									<td>${user.name}</td>
+									<td>${user.age}</td>
+									<td>${user.sex}</td>
+									<td>
+										<input type=button>修改</input>
+										<input type=button>删除</input>
+									</td>
+								</tr>
+							`
+							//append将指定的元素进行追加
+							$("#tab1").append(tr)
+						}
+					}
+				})
+				
+			})
+		</script>
+	</head>
+	<body>
+		<!-- 需要准备一个表格 -->
+		<table id="tab1" border="1px" width="80%" align="center" >
+			<tr align="center" height="60px">
+				<th colspan="5"><h1>用户列表</h1></th>
+			</tr>
+			<tr align="center" height="60px">
+				<th>编号</th>
+				<th>名称</th>
+				<th>年龄</th>
+				<th>性别</th>
+				<th>操作</th>
+			</tr>
+		</table>
+	</body>
+</html>

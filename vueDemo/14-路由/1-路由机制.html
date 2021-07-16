@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>全局组件定义</title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 2.定义路由链接
+					router-link 解析之后，变为a标签
+					to 解析之后，变为href属性
+			 -->
+			<router-link to="/user">用户</router-link>
+			<router-link to="/dog">狗</router-link>
+			
+			<!-- 3.定义路由填充位 该位置用来展现具体页面(组件) -->
+			<router-view></router-view>
+		</div>
+		
+		<!-- 4.2定义主键模板 -->
+		<template id="userTem">
+			<div>
+				<h1>我是组件的内容</h1>
+			</div>
+		</template>
+		<template id="dogTem">
+			<div>
+				<h1>拉布拉多</h1>
+			</div>
+		</template>
+		
+		<!-- 1.引入vue.js -->
+		<script src="../js/vue.js"></script>
+		<!-- 1.导入路由JS 注意顺序 -->
+		<script src="../js/vue-router.js"></script>
+		<script>
+			//4.定义组件
+			let user = {
+				//4.1定义页面
+				template: "#userTem"
+			}
+			let dog = {
+				//4.1定义页面
+				template: "#dogTem"
+			}
+			
+			//5.创建路由对象，定义路由规则
+			let router = new VueRouter({
+				//定义路由规则
+				routes: [
+							/*
+								重定向
+							*/
+							{path: "/",redirect:"/user"},
+							{path: "/user", component: user},
+							{path: "/dog", component: dog}]
+			})
+			
+			//6.将路由对象交给Vue对象管理
+			const vue = new Vue({
+				el: "#app",
+				//绑定路由
+				//router: router 名称一致时,可以简化
+				router
+			})
+		</script>
+	</body>
+</html>

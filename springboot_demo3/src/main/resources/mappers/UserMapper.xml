@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--语法:namespace="接口的路径" -->
+<mapper namespace="com.jt.mapper.UserMapper">
+    <!--规定: 乌龟的屁股
+        要求: 如果对象中的属性与数据库表中的字段一一对映射时,使用resultType
+             如果对象中的属性与数据库表中的字段不对映射时,使用resultMap
+            一般条件下,单表查询一般使用resultType,多表关联查询时使用resultMap
+        注意事项: 不能添加;号   版本冲突严重 mysql Oracle中
+    -->
+    <!--id必须与接口方法名称一致-->
+    <select id="findAll" resultType="User">
+        select id,name,age,sex from demo_user
+    </select>
+
+</mapper>

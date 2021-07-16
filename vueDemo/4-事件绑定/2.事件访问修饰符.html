@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件绑定</title>
+	</head>
+	<body>
+		<div id="app">
+			数值{{num}}
+			<!-- 1.stop阻止事件冒泡
+				事件冒泡：由于嵌套关系，先执行内部事件，如果执行成功之后
+				则事件冒泡给外层事件
+			 -->
+			 <div @click="addNum1">
+				 <button @click="addNum2">冒泡自增</button>
+				 <button @click.stop="addNum2">阻止冒泡自增</button>
+			 </div>
+			 <hr />
+			<!-- 2.阻止默认行为 -->
+			<!-- 2.1案例说明：编辑一个表单 2属性 username，password
+					要求实现Ajax提交（伪代码）
+					2.2需求：要求用户只执行login的操作，而不执行action的动作
+					2.3解决方案：prevent属性 阻止默认操作
+					2.4同类型案例： a标签阻止href跳转
+			 -->
+			 <form action="http://www.baidu.com">
+				 <input name="username" type="text" />
+				 <input name="password" type="password" />
+				 <button type="submit" @click.prevent="login">提交</button>
+			 </form>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data:{
+					num: 1
+				},
+				methods:{
+					addNum1(){
+						this.num++
+					},
+					addNum2(){
+						this.num++
+					},
+					login(){
+						alert("asd")
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

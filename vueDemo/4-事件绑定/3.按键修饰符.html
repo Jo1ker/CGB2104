@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>按键访问修饰符</title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 按键访问修饰符 回车触发
+					keyup: 键位弹起
+					keydown: 键位按下
+					keypress:数字键盘
+			 -->
+			回车触发：<input type="text" @keyup.enter="enter" /><br />
+			空格按下触发：<input type="text" @keydown.space="enter" />
+			<!-- 2.常用按键
+			.enter .tab  .delete(捕获”删除“和”退格“键)
+			.esc .space .up .down .left .right
+			 -->
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data:{
+					
+				},
+				methods:{
+					enter(){
+						alert("回车触发")
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
+
+

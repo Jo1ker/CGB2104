@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算属性</title>
+
+	</head>
+	<body>
+		<div id="app">
+			<!-- 数组相关用法 队列/栈 push 压栈 pop 弹栈
+				push() 在最后追加元素
+				pop() 从最后删除元素
+				shift() 从开头删除元素   出现笔试题
+				unshift() 从开头追加元素
+				splice() 替换数据
+				sort() 排序 按照字符编码顺序排列
+				reverse() 数组反转
+			 -->
+			<!-- 对数组进行循环遍历 -->
+			<span v-for="item in array">{{item}},</span><br>
+
+			追加数据: <input type="text" v-model.number="num" />
+			<button @click="push">push</button><br>
+			<button @click="pop">pop</button>
+			<button @click="shift">shift</button>
+			<button @click="splice1">替换第一个元素</button>
+			<button @click="splice2">将前3个数据改为num</button>
+			<button @click="splice3">将前3个数据改为num,num,num</button>
+			<button @click="splice4">删除第2个数据</button>
+
+
+			<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+			<script>
+				const app = new Vue({
+					el: '#app',
+					data: {
+						array: [1, 2, 3, 4, 5],
+						num: ' '
+					},
+					methods: {
+						push() {
+							this.array.push(this.num)
+						},
+						pop() {
+							this.array.pop()
+						},
+						shift() {
+							this.array.shift()
+						},
+						splice1() {
+							/* arg1: 操作数据的起始位置 下标从0开始
+							   arg2: 操作的数量
+							   arg3: 替换后的值 可以有多个值
+							   案例1:替换第一个元素
+							 */
+							this.array.splice(0, 1, this.num)
+						},
+						splice2() {
+							//将前3个数据改为num
+							this.array.splice(0, 3, this.num)
+						},
+						splice3() {
+							//将前3个数据改为num,num,num
+							this.array.splice(0, 3, this.num, this.num, this.num)
+						},
+						splice4() {
+							//删除第2个数据  隐藏功能
+							this.array.splice(1, 1)
+						}
+					},
+					//定义计算属性
+					computed: {
+
+					}
+				})
+			</script>
+	</body>
+</html>

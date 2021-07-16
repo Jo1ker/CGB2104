@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>前后端交互</title>
+
+	</head>
+	<body>
+		<div id="app" align="center">
+			<h1>用户新增</h1>
+			<div>
+				用户名：<input type="text" v-model="addUser.name" />
+				年龄：<input type="text" v-model="addUser.age" />
+				性别：<input type="text" v-model="addUser.sex" />
+				<button @click="addUserBtn">新增</button>
+			</div>
+			<hr />
+			
+			<h1>用户修改</h1>
+			<div>
+				ID：<input type="text" v-model="updateUser.id" disabled/>
+				用户名：<input type="text" v-model="updateUser.name" />
+				年龄：<input type="text" v-model="updateUser.age" />
+				性别：<input type="text" v-model="updateUser.sex" />
+				<button @click="updateUserBtn">修改</button>
+			</div>
+			<hr />
+			
+			<table border="1px" width="80%">
+				<tr>
+					<th colspan="5">
+						<h1>用户列表</h1>
+					</th>
+				</tr>
+				<tr>
+					<th>编号</th>
+					<th>名称</th>
+					<th>年龄</th>
+					<th>性别</th>
+					<th>操作</th>
+				</tr>
+				<tr align="center" v-for="user in userList">
+					<td v-text="user.id"></td>
+					<td v-text="user.name"></td>
+					<td v-text="user.age"></td>
+					<td v-text="user.sex"></td>
+					<td>
+						<button @click="toUpdate(user)">修改</button>
+						<button @click="deleteUserById(user.id)">删除</button>
+					</td>
+				</tr>
+			</table>
+			
+		</div>
+		
+		<script src="../js/axios.js"></script>
+		<script src="../js/vue.js"></script>
+		<script>
+			axios.defaults.baseURL = "http://localhost:8090"
+			const app = new Vue({
+				el: "#app",
+				data: {
+					userList: [],
+					addUser: {
+						name: ' ',
+						age: ' ',
+						sex: ' '
+					},
+					updateUser: {
+						id: ' ',
+						name: ' ',
+						age: ' ',
+						sex: ' '
+					}
+				},
+				methods: {
+					async getUserList(){
+						let {data: result} = await axios.get("/findAll")
+						this.userList = result
+					},
+					async deleteUserById(id){
+						let {data: result} = await axios.delete(`/user/${id}`)
+						console.log(result)
+						this.getUserList()
+					},
+					async addUserBtn(){
+						let {data: result} = await axios.post("/saveUser",this.addUser)
+						console.log(result)
+						this.getUserList()
+						this.addUser = {}
+					},
+					toUpdate(user){
+						this.updateUser = user
+					},
+					async updateUserBtn(){
+						let {data: result} = await axios.put("/updateUser",this.updateUser)
+						console.log(result)
+						this.getUserList()
+						this.updateUser = {}
+					}
+					
+				},
+				created(){
+					this.getUserList()
+				}
+			})
+		</script>
+		
+	</body>
+</html>

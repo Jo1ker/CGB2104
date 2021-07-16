@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--语法:namespace="接口的路径" -->
+<mapper namespace="com.jt.mapper.UserMapper">
+    <select id="findAll" resultType="User">
+        select * from demo_user
+    </select>
+
+    <select id="findById" resultType="User">
+        select * from demo_user where id=#{id}
+    </select>
+
+    <insert id="add">
+        insert into demo_user(id,name,age,sex) values (null,#{name},#{age},#{sex})
+    </insert>
+
+    <update id="update">
+        update demo_user set age=#{age},sex=#{sex} where name=#{name}
+    </update>
+
+    <delete id="delete">
+        delete from demo_user where id=#{id}
+    </delete>
+
+</mapper>

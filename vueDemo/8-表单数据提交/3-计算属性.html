@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算属性</title>
+
+	</head>
+	<body>
+		<div id="app">
+			<!-- 需求: 将数据字母进行反转 abc 反转之后 cba
+				   方法: 将数据拆分成数组，将数组进行反转，再将数组合并为字符串
+				   函数：
+						1.split 拆分
+						2.reserve 反转数据
+						3.join(' ') 将数组转化为字符串
+			 -->
+			用户输入: <input v-model="msg" /><br />
+			数据展现:{{msg.split( '' ).reverse().join( '' )}}
+			<br />
+			<!-- 
+			 				计算属性用法: 
+			 				将需要计算的操作通过特定的方法先行计算之后将结果进行展现
+			 				使用场景: 如果数据需要大量的计算 可以使用计算属性实现.
+			 			 -->
+			计算属性:{{reverse}}
+			<hr />
+			<!-- 面试题： 计算属性与方法的区别
+				计算属性如果调用多次，则有缓存的机制 只计算一次
+				方法调用没有缓存机制，所以调用多次则计算多次
+				如果一个计算重复调用时首选计算属性
+			 -->
+			<!-- 计算属性 -->
+			{{reverse}}
+			{{reverse}}<br />
+			<!-- 将方法的计算结果,在该位置进行展现.所以需要return-->
+			{{reverseMe2()}}
+			{{reverseMe2()}}
+			{{reverseMe2()}}
+			<!-- file:///F:/第三阶段课前资料/3-vue资料/8-vue生命周期函数/vue生命周期.html<button @click="reverseMe">调用方法</button> -->
+		</div>
+
+
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data: {
+					msg: ' '
+				},
+				methods: {
+					reverseMe(){
+						console.log("方法执行")
+						this.msg = this.msg.split('').reverse().join('')
+					},
+					reverseMe2(){
+						console.log("方法执行")
+						return this.msg.split('').reverse().join('')
+					}
+				},
+				//定义计算属性
+				computed: {
+					//定义一个方法，要求必须有返回值
+					reverse() {
+						console.log("计算属性执行")
+						return this.msg.split('').reverse().join('')
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue指令练习</title>
+		<style>
+			/*为属性设置隐藏*/
+			[v-cloak]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" >
+			<!-- 1.指令练习 v-cloak
+					当浏览器解析JS完成前，用户看到的数据是{{msg}},
+					直到浏览器加载完成全部JS，则{{msg}}替换为具体的数据
+					需求：不想让用户看到没有解析的数据，使用v-cloak属性
+			 -->
+			 测试：测试v-cloak指令
+			<h1 v-cloak>{{msg}}</h1>
+			<hr />
+			<!-- 2.v-text 将上述v-cloak优化了 -->
+			测试2：测试v-text指令
+			<h1 v-text="msg"></h1>
+			<hr />
+			<!-- 3.v-html 让浏览器解析html之后展现 -->
+			测试v-html指令
+			<span v-html="html"></span>
+			<hr />
+			<!-- 4.需求：只想展现{{msg}}不需要vue解析
+					语法：v-pre指令 vue直接跳过该标签不解析
+			 -->
+			 测试：v-pre指令
+			 <span v-pre>{{msg}}</span>
+			<hr />
+			<!-- 5.需求：元素只解析一次 之后用户随意修改，数据不变 -->
+			v-once :数据只解析一次<br />
+			<span v-once>{{one}}</span>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<script>
+			//一般工作中字符串写法 提倡使用单引号
+			const app = new Vue({
+				el: "#app",
+				data: {
+					msg: '测试数据',
+					html: '<h3>测试html语句</h3>',
+					one: '数据解析一次'
+				}
+			})
+		</script>
+	</body>
+</html>

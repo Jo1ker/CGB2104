@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>入门案例</title>
+	</head>
+	<body>
+		<!-- 1.定义vue工作区域 -->
+		<div id="app">
+			<h1>VUE入门案例</h1>
+			<!-- 4.数据引用 插值表达式 -->
+			{{hello}}
+			
+			<!-- 2.导入函数类库 -->
+			<!-- 生产环境版本，优化了尺寸和速度 -->
+			<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+			<!-- 3.实例化Vue对象 -->
+			<script>
+				const app = new Vue({
+					//el:标识vue对哪个元素有效
+					el: "#app",
+					data: {
+						hello: "你好Vue"
+					}
+				})
+			</script>
+		</div>
+	</body>
+</html>

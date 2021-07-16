@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>全局组件定义</title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 2.3 引用组件 通过便签 -->
+			<add-num-com></add-num-com>
+			<add-num-com></add-num-com>
+		</div>
+		
+		<!-- 2.2 定义模板html 模板必须有根目录-->
+		<template id="addNumTem">
+			<div>
+				<h3>测试组件用法</h3>
+				数据: {{num}}
+				<button @click="addNum">自增</button>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js"></script>
+		<script>
+			//2.定义全局组件
+			Vue.component("addNumCom",{
+				//2.1 定义属性
+				data(){
+					return {
+						num: 1
+					}
+				},
+				//2.2 定义组件模板  编辑html/js/css
+				template: "#addNumTem",
+				methods: {
+					addNum(){
+						this.num++
+					}
+				}
+				
+			})
+			
+			//1.定义vue对象
+			const app = new Vue({
+				el: "#app"
+			})
+		</script>
+	</body>
+</html>

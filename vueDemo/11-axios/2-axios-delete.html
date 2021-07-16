@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Axios的delete</title>
+	</head>
+	<body>
+		<h1>Axios远程调用练习</h1>
+		<script src="../js/axios.js"></script>
+		<script>
+			/*get请求的方式 与delete请求的方式一致*/
+			//1.删除name="love"的数据 使用params对象的方式实现
+			let user={
+				name: "love"
+			}
+			axios.delete("http://localhost:8090/deleteByName",{
+				params:user
+			}).then(result => {
+				console.log(result.data)
+			})
+			//2.删除name="宵夜吃什么"sex="女" 使用restful风格实现
+			axios.delete("http://localhost:8090/user/宵夜吃什么/女")
+				.then(result => {
+					console.log(result.data)
+				})
+			
+		    
+		</script>
+	</body>
+</html>

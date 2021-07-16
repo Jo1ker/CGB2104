@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>循环结构</title>
+		
+	</head>
+	<body>
+		<div id="app">
+			<!-- 问题：什么样的数据需要循环 1.数组 2.对象
+					语法: v-for 遍历展现的是标签
+			 -->
+			<h1>循环遍历结构</h1>
+			<p v-for=" item in hobby">{{item}}</p>
+			<p v-for=" item in hobby" v-text="item"></p>
+			<hr />
+			<h1>遍历对象</h1>
+			<!-- 1.如果直接遍历对象。则展现value的值 -->
+			<div v-for=" item in user">{{item}}</div>
+			<!-- 2.如果直接遍历对象。arg1:value arg2:key -->
+			<div v-for=" (value,key) in user">
+				<p>{{key}}---{{value}}</p>
+			</div>
+			<!-- 3.如果直接遍历对象。arg1:value arg2:key arg3:index -->
+			<div v-for=" (value,key,index) in user">
+				<p>{{value}}---{{key}}---{{index}}</p>
+			</div>
+			<hr />
+			<h1>遍历集合</h1>
+			<!-- 约定：key用来区分遍历的节点信息 -->
+			<div v-for="user in userList" :key="user.id">
+				<p>ID编号:{{user.id}}</p>
+				<p>名称:{{user.name}}</p>
+			</div>
+			
+		</div>
+		
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data:{
+					hobby: ['电脑','手机','平板'],
+					user: {
+						id: 100,
+						name: 'tomcat'
+					},
+					userList: [{id:100,name:'tomcat1'},
+					{id:200,name:'tomcat2'},
+					{id:300,name:'tomcat3'},
+					]
+				},
+				methods:{
+					
+				}
+			})
+		</script>
+	</body>
+</html>
+
+
+

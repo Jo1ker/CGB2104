@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/springboot_demo1/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_demo2/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_demo3/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_demo21/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_demo22/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot-demo4/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_demo4/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_demo41/pom.xml" />
+        <option value="$PROJECT_DIR$/jt/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

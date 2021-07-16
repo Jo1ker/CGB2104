@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>按键访问修饰符</title>
+		<style>
+			.aquaClass{
+				width: 300px;
+				height: 150px;
+				background-color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 需求: 如果直接将地址写死在href标签中,扩展性差
+							需要实现属性的动态获取
+					标签: v-bind:属性="数据的key"
+			-->
+			<a href="http://www.baidu.com">百度</a>
+			<a v-bind:href="url">百度</a>
+			<!-- 简化写法 -->
+			<a :href="url">百度</a>
+			<hr />
+			<!-- 类型绑定 一般的class用来修饰样式
+					:class="{类型名称 : boolean类型数据}"
+			 -->
+			<div :class="{aquaClass: flag}"></div>
+			<button @click="flag = !flag">切换样式</button>
+		</div>
+		
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data:{
+					url:'http://www.baidu.com',
+					flag: true
+				},
+				methods:{
+					
+				}
+			})
+		</script>
+	</body>
+</html>
+
+

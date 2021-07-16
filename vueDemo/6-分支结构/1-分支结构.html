@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>分支结构</title>
+		
+	</head>
+	<body>
+		<div id="app">
+			<!-- 语法
+					1.v-if 如果满足条件则展现后续内容
+					2.v-else-if 除了if之外的其他的可能
+					3.v-else 上述条件都不满足时，展现如下内容
+					注意事项：
+					1.v-if可以单独编辑
+					2.v-else/v-else-if 不可以单独使用必须与v-if联用
+			 -->
+			 <h1>考试成绩</h1>
+			录入成绩：<input type="number" v-model="score" />
+			<div v-if="score>=90">优秀</div>
+			<div v-else-if="score>=80">良好</div>
+			<div v-else-if="score>=70">中等</div>
+			<div v-else-if="score>=60">及格</div>
+			<div v-else>搬砖去吧</div>
+			
+		</div>
+		
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data:{
+					score: ' '
+				},
+				methods:{
+					
+				}
+			})
+		</script>
+	</body>
+</html>
+
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>双向数据绑定</title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- v-model 只能标识可以编辑的标签 数据绑定 
+					1.数据与页面绑定的 数据变化，则页面数据同步修改
+					2.页面与数据绑定 页面值发生变化，则数据同步修改
+			-->
+			数据录入： <input type="text" v-model="msg" />
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data:{
+					msg: '测试数据'
+				}
+			})
+		</script>
+	</body>
+</html>
